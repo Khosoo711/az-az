@@ -11,12 +11,17 @@ var roundScore = 0;
 var Dice = Math.floor(Math.random() * 6) + 1;
 //<div class="player-score" id="score-1">72</div>
 // ehleh
-window.document.querySelector("#score-0").textContent = 0;
-document.querySelector("#score-1").textContent = 0;
-
-document.querySelector("#current-0").textContent = 0;
-document.querySelector("#current-1").textContent = 0;
-
-document.querySelector(".dice").style.display = "none";
+document.getElementById("score-0").textContent = "0";
+document.getElementById("score-1").textContent = "0";
+document.getElementById("current-0").textContent = "0";
+document.getElementById("current-1").textContent = "0";
+var dicedom = document.querySelector(".dice");
+dicedom.style.display = "none";
+document.querySelector(".btn-roll").addEventListener("click", function() {
+  var Dice = Math.floor(Math.random() * 6) + 1;
+  dicedom.style.display = "block";
+  dicedom.src = "dice-" + Dice + ".png";
+  //   alert("Шоо буулаа:" + Dice);
+});
 
 console.log("Шоо ингэж буулаа:" + Dice);
