@@ -29,21 +29,52 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
     roundScore = roundScore + Dice;
     document.getElementById("current-" + ActivePlayer).textContent = roundScore;
   } else {
-    roundScore = 0;
-    document.getElementById("current-" + ActivePlayer).textContent = 0;
+    switchToNextPlayer();
+  }
+});
+// console.log("Шоо ингэж буулаа:" + Dice);
 
-    ActivePlayer === 0 ? (ActivePlayer = 1) : (ActivePlayer = 0);
+// hold tovchnii event
+document.querySelector(".btn-hold").addEventListener("click", function() {
+  // toglogchiin tsugluulsan onoog global onoon deer n nemj ogoh
 
-    // ulaan tsegiig shiljuuleh
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
+  //   if (ActivePlayer === 0) {
+  //     scores[0] = scores[0] + roundScore;
+  //   } else {
+  //     scores[1] = scores[1] + roundScore;
+  //   }
 
-    //   if(ActivePlayer === 0) {
-    //       ActivePlayer = 1;
+  scores[ActivePlayer] = scores[ActivePlayer] + roundScore;
+  document.getElementById("score-" + ActivePlayer).textContent =
+    scores[ActivePlayer];
+  // yalagchiig todruulah
+  if (scores[ActivePlayer] >= 10) {
+    document.getElementById("name-" + ActivePlayer).textContent = "Азтай нсс! ";
 
-    //   }else { ActivePlayer = 0;}
-    diceDom.style.display = "none";
+    document
+      .querySelector(".player-" + ActivePlayer + "-panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + ActivePlayer + "-panel")
+      .classList.remove("active");
+  } else {
+    switchToNextPlayer();
   }
 });
 
-// console.log("Шоо ингэж буулаа:" + Dice);
+function switchToNextPlayer() {
+  roundScore = 0;
+  document.getElementById("current-" + ActivePlayer).textContent = 0;
+
+  ActivePlayer === 0 ? (ActivePlayer = 1) : (ActivePlayer = 0);
+
+  // ulaan tsegiig shiljuuleh
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+
+  //   if(ActivePlayer === 0) {
+  //       ActivePlayer = 1;
+
+  //   }else { ActivePlayer = 0;}
+  diceDom.style.display = "none";
+}
